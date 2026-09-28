@@ -1,0 +1,4 @@
+const assert=require('assert');
+const s=require('../out/src/splunk.js');
+const a={repository:'payment-service',logs:[{level:'ERROR',messageTemplate:'failed'}],apis:[{method:'GET',path:'/payments'}],telemetry:[{id:'latency',name:'Latency',kind:'metric',fields:['responseTime'],evidence:['responseTime'],sourceFiles:['A.java'],observed:true,confidence:'strong',description:''}],files:[],technology:{languages:['Java'],frameworks:['Spring Boot'],applicationTypes:['REST API']}};
+const q=s.fallbackQuestions(a), qs=s.spl(a,q,{index:'application',serviceField:'service',levelField:'level'});assert(qs.length>0);const d=s.dashboard('Test',['payment-service'],s.panels(a,qs),'Spring Boot','1.0');const json=s.studioJson(d);assert(s.validateJson(json).valid);assert(json.includes('visualizations'));console.log('All tests passed');

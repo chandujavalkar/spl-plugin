@@ -1,0 +1,9 @@
+**/*.ts
+**/*.map
+test/**
+sample-repository/**
+.vscode/**
+node_modules/**
+.git/**
+README.md
+ARCHITECTURE.md

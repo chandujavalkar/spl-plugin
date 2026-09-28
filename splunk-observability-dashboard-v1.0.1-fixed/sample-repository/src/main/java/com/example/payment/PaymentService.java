@@ -1,0 +1,3 @@
+package com.example.payment;
+import org.slf4j.Logger; import org.slf4j.LoggerFactory; import io.micrometer.core.instrument.MeterRegistry;
+public class PaymentService { private static final Logger log=LoggerFactory.getLogger(PaymentService.class); MeterRegistry meterRegistry; public void create(String paymentId){log.info("Payment request received {}",paymentId);try{log.info("Payment completed {}",paymentId);meterRegistry.counter("payment.success").increment();}catch(Exception ex){log.error("Payment authorization failed {}",paymentId);meterRegistry.counter("payment.failure").increment();}} public void retry(String id){log.warn("Payment retry {}",id);} }

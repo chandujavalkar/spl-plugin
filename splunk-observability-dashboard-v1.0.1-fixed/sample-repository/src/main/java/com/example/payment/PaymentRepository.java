@@ -1,0 +1,1 @@
+package com.example.payment; import org.slf4j.Logger; import org.slf4j.LoggerFactory; public class PaymentRepository {private static final Logger log=LoggerFactory.getLogger(PaymentRepository.class); public void save(String id){log.debug("Oracle JDBC save payment {}",id);}}

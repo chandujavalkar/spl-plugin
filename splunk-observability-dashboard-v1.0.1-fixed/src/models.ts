@@ -1,0 +1,9 @@
+export type PanelType='singleValue'|'line'|'area'|'bar'|'column'|'pie'|'table'|'markdown';
+export type PanelCategory='overview'|'api'|'application'|'dependency'|'security'|'infrastructure';
+export interface Position{x:number;y:number;w:number;h:number}
+export interface TelemetrySignal{id:string;name:string;kind:string;fields:string[];evidence:string[];sourceFiles:string[];observed:boolean;confidence:'strong'|'moderate'|'potential';description:string}
+export interface RepositoryAnalysis{repository:string;rootPath:string;fingerprint:string;analyzedAt:string;files:any[];technology:{languages:string[];frameworks:string[];applicationTypes:string[]};dependencies:any[];apis:any[];logs:any[];frameworkLogs:any[];telemetry:TelemetrySignal[];applicationSummary:string;architecture:string[];responsibilities:string[];businessEvents:string[];errors:string[];correlationIdentifiers:string[];evidence:string[];changedFiles:string[];aiGenerated:boolean;uncertainty:string[]}
+export interface OperationalQuestion{id:string;question:string;category:string;requiredTelemetry:string[];reason:string;priority:'high'|'medium'|'low'}
+export interface SplQuery{id:string;question:string;title:string;query:string;visualization:string;requiredFields:string[];explanation:string;evidence:string[]}
+export interface DashboardPanel{id:string;title:string;description?:string;type:PanelType;category:PanelCategory;splQuery:string;requiredFields:string[];position:Position;evidence:{sourceFiles:string[];telemetryEvidence:string[];generatedQuestion:string;reason:string;uncertainty?:string[]}}
+export interface DashboardDefinition{id:string;title:string;description:string;repositories:string[];panels:DashboardPanel[];dataSources:any[];inputs:any[];layout:{width:number;height:number;display:'auto-scale'|'actual-size'};metadata:any}

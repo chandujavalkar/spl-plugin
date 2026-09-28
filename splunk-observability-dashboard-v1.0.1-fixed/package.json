@@ -1,0 +1,185 @@
+{
+  "name": "splunk-observability-dashboard",
+  "displayName": "AI-Powered Splunk Observability Dashboard Generator",
+  "version": "1.0.0",
+  "publisher": "local-dev",
+  "description": "Evidence-driven repository analysis and Splunk Dashboard Studio generation.",
+  "engines": {
+    "vscode": "^1.104.0"
+  },
+  "categories": [
+    "Other",
+    "Visualization"
+  ],
+  "main": "./out/extension.js",
+  "activationEvents": [
+    "onCommand:splunkObservability.selectRepositories",
+    "onCommand:splunkObservability.analyzeRepositories",
+    "onCommand:splunkObservability.generateDashboard",
+    "onCommand:splunkObservability.openDesigner",
+    "onCommand:splunkObservability.showDashboardJson",
+    "onCommand:splunkObservability.copyDashboardJson",
+    "onCommand:splunkObservability.validateDashboard",
+    "onCommand:splunkObservability.refreshAnalysis",
+    "onCommand:splunkObservability.importDashboard"
+  ],
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "splunkObservability",
+          "title": "SPLUNK OBSERVABILITY",
+          "icon": "$(pulse)"
+        }
+      ]
+    },
+    "views": {
+      "splunkObservability": [
+        {
+          "id": "splunkObservability.repositories",
+          "name": "Repositories",
+          "type": "tree"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "splunkObservability.selectRepositories",
+        "title": "Splunk Observability: Select Repositories"
+      },
+      {
+        "command": "splunkObservability.analyzeRepositories",
+        "title": "Splunk Observability: Analyze Repository"
+      },
+      {
+        "command": "splunkObservability.generateDashboard",
+        "title": "Splunk Observability: Generate Dashboard"
+      },
+      {
+        "command": "splunkObservability.openDesigner",
+        "title": "Splunk Observability: Open Dashboard Designer"
+      },
+      {
+        "command": "splunkObservability.showDashboardJson",
+        "title": "Splunk Observability: Show Dashboard JSON"
+      },
+      {
+        "command": "splunkObservability.copyDashboardJson",
+        "title": "Splunk Observability: Copy Dashboard JSON"
+      },
+      {
+        "command": "splunkObservability.validateDashboard",
+        "title": "Splunk Observability: Validate Dashboard"
+      },
+      {
+        "command": "splunkObservability.refreshAnalysis",
+        "title": "Splunk Observability: Refresh Analysis"
+      },
+      {
+        "command": "splunkObservability.importDashboard",
+        "title": "Splunk Observability: Import Existing Dashboard"
+      }
+    ],
+    "configuration": {
+      "title": "Splunk Observability Dashboard",
+      "properties": {
+        "splunkObservability.defaultIndex": {
+          "type": "string",
+          "default": "application"
+        },
+        "splunkObservability.defaultSource": {
+          "type": "string",
+          "default": ""
+        },
+        "splunkObservability.defaultSourcetype": {
+          "type": "string",
+          "default": ""
+        },
+        "splunkObservability.serviceField": {
+          "type": "string",
+          "default": "service"
+        },
+        "splunkObservability.environmentField": {
+          "type": "string",
+          "default": "environment"
+        },
+        "splunkObservability.logLevelField": {
+          "type": "string",
+          "default": "level"
+        },
+        "splunkObservability.timestampField": {
+          "type": "string",
+          "default": "_time"
+        },
+        "splunkObservability.maxFiles": {
+          "type": "number",
+          "default": 1500
+        },
+        "splunkObservability.maxFileBytes": {
+          "type": "number",
+          "default": 200000
+        },
+        "splunkObservability.excludeDirectories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            ".git",
+            "node_modules",
+            "target",
+            "build",
+            "dist",
+            "coverage",
+            ".idea",
+            ".vscode",
+            "vendor",
+            "generated",
+            "out"
+          ]
+        },
+        "splunkObservability.secretFileNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            ".env",
+            ".env.local",
+            ".env.production",
+            "credentials.json",
+            "secrets.yml",
+            "secrets.yaml"
+          ]
+        },
+        "splunkObservability.cacheDirectory": {
+          "type": "string",
+          "default": ".vscode/splunk-observability"
+        },
+        "splunkObservability.aiVendor": {
+          "type": "string",
+          "default": "copilot"
+        },
+        "splunkObservability.aiFamily": {
+          "type": "string",
+          "default": ""
+        },
+        "splunkObservability.analysisVersion": {
+          "type": "string",
+          "default": "1.0"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "test": "npm run compile && node test/run-tests.js",
+    "package": "npm run compile && npx @vscode/vsce package --no-dependencies"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/vscode": "^1.104.0",
+    "@vscode/vsce": "^3.6.0",
+    "typescript": "^5.8.3"
+  }
+}
